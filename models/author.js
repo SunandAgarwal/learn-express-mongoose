@@ -29,7 +29,15 @@ AuthorSchema
 
 // Virtual for author's lifespan
 AuthorSchema.virtual('lifespan').get(function() {
-  return this.date_of_death - this.date_of_birth;
+  var lifetime = '';
+  if(this.date_of_birth) {
+    lifetime = this.date_of_birth.getYear().toString();
+  }
+  lifetime += ' - ';
+  if(this.date_of_death) {
+    lifetime += this.date_of_death.getYear().toString();
+  }
+  return lifetime;
 });
 
 //Export model
